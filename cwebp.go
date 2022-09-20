@@ -18,10 +18,8 @@ func CWebp(src, pattern, dst string) {
 }
 func cwebp_help(src, file, dst string, index, total int) {
 	in := strings.Join([]string{src, file}, "/")
-	log.Info.Println(in)
 	extname := path.Ext(file)
 	filename := strings.Trim(file, extname)
-	log.Info.Printf("文件名:%s\n", filename)
 	out := strings.Join([]string{dst, strings.Join([]string{filename, "webp"}, ".")}, "/")
 	cmd := exec.Command("cwebp", in, "-o", out)
 	log.Debug.Printf("开始处理文件%s\t生成的命令是:%s", file, cmd)
@@ -50,7 +48,7 @@ func cwebp_help(src, file, dst string, index, total int) {
 	if err = cmd.Wait(); err != nil {
 		log.Debug.Println("命令执行中有错误产生", err)
 	}
-	log.Debug.Printf("完成当前文件的处理:源文件是%s\t目标文件是%s\n", in, file)
+	log.Debug.Printf("完成当前文件的处理:源文件是%s\t目标文件是%s\n", in, out)
 }
 
 func getFiles(dir, pattern string) []string {
